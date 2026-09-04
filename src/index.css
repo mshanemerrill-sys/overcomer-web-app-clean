@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: #6750A4;
+    --color-secondary: #21005D;
+    --color-background: #FEF7FF;
+    --color-surface: #FFFFFF;
+    --color-text: #1C1B1F;
+    --color-text-muted: #79747E;
+    --color-accent-gold: #FFD700;
+    --color-accent-teal: #00796B;
+    --color-accent-coral: #D32F2F;
+    --color-success: #4CAF50;
+    --color-warning: #FF9800;
+    --color-error: #D32F2F;
+  }
+
+  .dark {
+    --color-primary: #D0BCFF;
+    --color-secondary: #EADDFF;
+    --color-background: #141218;
+    --color-surface: #1D1B20;
+    --color-text: #E6E1E5;
+    --color-text-muted: #CCC2DC;
+  }
+
+  html {
+    @apply antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html, body {
+    @apply h-full w-full overflow-x-hidden;
+  }
+
+  body {
+    @apply bg-background-light text-gray-900;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    overscroll-behavior-y: none;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-400 hover:bg-primary-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary-100 hover:bg-secondary-200 text-secondary-800 font-semibold py-3 px-6 rounded-xl transition-all duration-200;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary-400 text-primary-400 hover:bg-primary-400 hover:text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200;
+  }
+
+  .btn-danger {
+    @apply bg-accent-coral hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-4 border border-gray-100;
+  }
+
+  .card-elevated {
+    @apply bg-white rounded-2xl shadow-lg p-5;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 outline-none transition-all duration-200 text-gray-900 placeholder-gray-400;
+  }
+
+  .nav-tab {
+    @apply flex flex-col items-center justify-center py-2 px-3 rounded-lg transition-all duration-200;
+  }
+
+  .nav-tab.active {
+    @apply bg-primary-100 text-primary-600;
+  }
+
+  .nav-tab:not(.active) {
+    @apply text-gray-400 hover:text-gray-600;
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Custom scrollbar for modal content */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(103, 80, 164, 0.3);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(103, 80, 164, 0.5);
+}
+
+/* Breathing animation for grounding exercises */
+@keyframes breathe {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+.breathe-circle {
+  animation: breathe 8s ease-in-out infinite;
+}
+
+/* PWA install banner */
+.install-banner {
+  @apply fixed bottom-20 left-4 right-4 bg-primary-400 text-white p-4 rounded-xl shadow-lg flex items-center justify-between z-50;
+}

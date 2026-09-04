@@ -1,0 +1,21 @@
+{
+  "name": "OverComer",
+  "short_name": "OverComer",
+  "description": "Faith-filled help for overcoming life's challenges, substance recovery, mental health wellness, and celebrating victories. A ministry of The Faith Connection.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FEF7FF",
+  "theme_color": "#6750A4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/overcomer-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "lifestyle"],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

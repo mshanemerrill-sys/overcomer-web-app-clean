@@ -1,0 +1,77 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Sun Halo/Aura centering on the horizon -->
+    <path
+        android:pathData="M54,66m-24,0a24,24 0 1,1 48,0a24,24 0 1,1 -48,0">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:centerX="54"
+                android:centerY="66"
+                android:gradientRadius="24"
+                android:type="radial">
+                <item android:offset="0.0" android:color="#99FFE8A0" /> <!-- Flaring golden core -->
+                <item android:offset="0.6" android:color="#3BFEA17E" /> <!-- Soft coral middle layer -->
+                <item android:offset="1.0" android:color="#00000000" /> <!-- Fading out to merge with sky -->
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Glowing Rising Sun emerging from the sea -->
+    <path
+        android:pathData="M 36,70 A 18,18 0 0,1 72,70 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="54"
+                android:startY="52"
+                android:endX="54"
+                android:endY="70"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#FFFFFF" />
+                <item android:offset="1.0" android:color="#FFE890" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Distant Sea Surface/Ocean meeting the sunrise -->
+    <path
+        android:pathData="M0,69 Q27,67 54,69 T108,69 L108,79 L0,79 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="54"
+                android:startY="67"
+                android:endX="54"
+                android:endY="79"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#4B245D" /> <!-- Soft purple deep water reflection -->
+                <item android:offset="1.0" android:color="#2c173d" /> <!-- Deep water shading -->
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Slicing beach foreground shoreline at the bottom -->
+    <path
+        android:pathData="M0,77 Q54,74 108,77 L108,108 L0,108 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="54"
+                android:startY="74"
+                android:endX="54"
+                android:endY="108"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#29153a" /> <!-- Reflective wet sand shore -->
+                <item android:offset="1.0" android:color="#140A1D" /> <!-- Solid dark layout base -->
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Victorious OverComer silhouette standing tall, hood up, arms wide open to the sky -->
+    <path
+        android:fillColor="#150821"
+        android:pathData="M 46,88 L 47,68 Q 49,56 47,48 L 24,40 Q 22,39 24,37 Q 26,35 28,37 L 49,43 Q 51,41 51,35 Q 51,26 54,26 Q 57,26 57,35 Q 57,41 59,43 L 80,37 Q 82,35 84,37 Q 86,39 84,40 L 61,48 Q 59,56 61,68 L 62,88 Q 54,88 54,83 Q 54,88 46,88 Z" />
+
+</vector>

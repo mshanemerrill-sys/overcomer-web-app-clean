@@ -1,0 +1,8 @@
+{
+  "name": "OverComer",
+  "description": "Faith-filled help for those tough days, substance recovery and mental wellness",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
