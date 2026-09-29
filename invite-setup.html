@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>The Faith Connection - Account Setup</title>
+<style>
+*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#F7F4ED;color:#18332B;min-height:100vh;margin:0;display:flex;align-items:center;justify-content:center;padding:24px}.card{background:#fff;border:1px solid #D8DED9;border-radius:16px;padding:30px 26px;max-width:420px;width:100%}.logo{text-align:center;font-size:26px;font-weight:800;margin-bottom:18px}h1{font-size:24px;text-align:center;margin:0 0 8px}.sub{color:#5F6F69;text-align:center;line-height:1.45;margin:0 0 22px}.field{margin:14px 0}label{display:block;font-weight:700;margin-bottom:6px}input{width:100%;padding:14px 15px;border:1px solid #D8DED9;border-radius:12px;font-size:16px}button,.download{display:block;width:100%;border:0;border-radius:12px;padding:15px;background:#1F5A46;color:#fff;font-size:16px;font-weight:700;text-align:center;text-decoration:none;margin-top:14px}.msg{display:none;padding:12px;border-radius:10px;margin-bottom:14px}.err{background:#FDEEEE;color:#9E2E2E}.ok{text-align:center;display:none}.note{font-size:13px;color:#5F6F69;text-align:center;line-height:1.4;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="logo">The Faith Connection</div>
+<div id="formWrap">
+<h1>Create Your Password</h1>
+<p class="sub">You were invited to the Community Response app. Create your password below. No activation code is needed.</p>
+<div id="error" class="msg err"></div>
+<form id="form">
+<div class="field"><label for="pw">Create your password</label><input id="pw" type="password" minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></div>
+<div class="field"><label for="cf">Confirm your password</label><input id="cf" type="password" minlength="8" autocomplete="new-password" placeholder="Enter the same password again"></div>
+<button id="btn" type="submit">Finish Account Setup</button>
+</form>
+</div>
+<div id="success" class="ok">
+<h1>Your account is ready.</h1>
+<p class="sub">Your password has been saved and your Community Response account is active.</p>
+<a class="download" href="https://www.thefaithconnection.org/community-response-app">Download / Open Community Response App</a>
+</div>
+<p class="note">Authorized Faith Connection personnel only.</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3/dist/umd/supabase.min.js"></script>
+<script>
+(function(){
+const SUPABASE_URL="https://lgvqdoovumaplxogjbmn.supabase.co";
+const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxndnFkb292dW1hcGx4b2dqYm1uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY1NTU1MjksImV4cCI6MjEwMjEzMTUyOX0.1rlmAa13Yu-or4mKTdMCYzsUUIUGNs6iQP42tH5pj8c";
+const qs=new URLSearchParams(location.search);
+const tokenHash=qs.get("token_hash")||"";
+const errorBox=document.getElementById("error"), form=document.getElementById("form"), btn=document.getElementById("btn");
+function err(m){errorBox.textContent=m;errorBox.style.display="block"}
+if(!tokenHash){err("This invitation link is incomplete. Please open the newest invitation email.");btn.disabled=true;return}
+const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY,{auth:{autoRefreshToken:false,persistSession:false}});
+form.addEventListener("submit",async function(e){
+e.preventDefault();errorBox.style.display="none";
+const pw=document.getElementById("pw").value,cf=document.getElementById("cf").value;
+if(pw.length<8){err("Password must be at least 8 characters.");return}
+if(pw!==cf){err("Passwords do not match.");return}
+btn.disabled=true;btn.textContent="Finishing Setup...";
+try{
+let v=await client.auth.verifyOtp({token_hash:tokenHash,type:"invite"});
+if(v.error) throw new Error("This invitation link is invalid or has expired. Please ask a Faith Connection administrator to resend your invitation.");
+let u=await client.auth.updateUser({password:pw}); if(u.error) throw u.error;
+let a=await client.rpc("activate_invited_profile"); if(a.error) throw new Error("Your password was saved, but your Community Response account could not be activated. Please contact a Faith Connection administrator.");
+await client.auth.signOut();
+document.getElementById("formWrap").style.display="none";document.getElementById("success").style.display="block";
+}catch(ex){err(ex.message||"Could not finish account setup. Please try again.");btn.disabled=false;btn.textContent="Finish Account Setup"}
+});
+})();
+</script>
+</body>
+</html>
